@@ -25,9 +25,10 @@ const reducer = (state, action) => {
     case "REMOVE": {
       return state.filter((it) => it.id !== action.targetId);
     }
-    case "EDIT":{
-      return state.map((it) => it.id === action.targetId ?
-      { ...it, content: action.newContent } : it
+    case "EDIT": {
+      return state.map((it) =>
+        it.id === action.targetId ? { ...it, content: action.newContent } : it
+      );
     }
     default:
       return state;
@@ -70,7 +71,6 @@ const App = () => {
       type: "CREATE",
       data: { author, content, emotion, id: dataId.current },
     });
-
     // const created_date = new Date().getTime();
     // const newItem = {
     //   author,
@@ -92,8 +92,7 @@ const App = () => {
   }, []);
 
   const onEdit = useCallback((targetId, newContent) => {
-
-    dispatch({type: "EDIT", targetID, newContent})
+    dispatch({ type: "EDIT", targetId, newContent });
 
     // setData((data) =>
     //   data.map((it) =>
