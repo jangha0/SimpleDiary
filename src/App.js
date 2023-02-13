@@ -17,7 +17,7 @@ const reducer = (state, action) => {
     case "CREATE": {
       const created_date = new Date().getTime();
       const newItem = {
-        ...action.data, //create라는 action의 data를 spread로 펼침
+        ...action.data,
         created_date,
       };
       return [newItem, ...state];
@@ -36,8 +36,6 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-  // const [data, setData] = useState([]);
-
   const [data, dispatch] = useReducer(reducer, []);
 
   const dataId = useRef(0);
@@ -58,8 +56,6 @@ const App = () => {
     });
 
     dispatch({ type: "INIT", data: initData });
-    //data: initData로 reducer에 어떤 data인지 알려주기
-    //setData(initData); 해당 업무를 dispatch가 대신함.
   };
 
   useEffect(() => {
@@ -71,34 +67,15 @@ const App = () => {
       type: "CREATE",
       data: { author, content, emotion, id: dataId.current },
     });
-    // const created_date = new Date().getTime();
-    // const newItem = {
-    //   author,
-    //   content,
-    //   emotion,
-    //   created_date,
-    //   id: dataId.current,
-    // };
     dataId.current += 1;
-    // setData((data) => [newItem, ...data]);
-    //-> const created_date는 직접 case에 넣을 것임
-    //new item은 모두 dispatch 안애 넣어주기
-    //setData 함수가 필요없어짐.
   }, []);
 
   const onRemove = useCallback((targetId) => {
     dispatch({ type: "REMOVE", targetId });
-    // setData((data) => data.filter((it) => it.id !== targetId));
   }, []);
 
   const onEdit = useCallback((targetId, newContent) => {
     dispatch({ type: "EDIT", targetId, newContent });
-
-    // setData((data) =>
-    //   data.map((it) =>
-    //     it.id === targetId ? { ...it, content: newContent } : it
-    //   )
-    // );
   }, []);
 
   const getDiaryAnalysis = useMemo(() => {
