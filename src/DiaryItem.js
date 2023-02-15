@@ -1,16 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-const DiaryItem = ({
-  onEdit, //app 컴포넌트로부터 받은 함수
-  onRemove, //app 컴포넌트로부터 받은 함수
-  author,
-  content, // 나머지는 모두 data 이 중content는 일기 아이템을 수정하여 변화할 수 있음
-  created_date,
-  emotion,
-  id,
-}) => {
-  useEffect(() => {
-    console.log(`${id}번 째 아이템 렌더!`);
-  });
+import React, { useState, useRef, useContext } from "react";
+import { DiaryDispatchContext } from "./App";
+const DiaryItem = ({ id, author, content, emotion, created_date }) => {
+  //onEdit, onRemove props 삭제 후,
+  // - const { onRemove, onEdit } = useContext(DiaryDispatchContext);
+  const { onRemove, onEdit } = useContext(DiaryDispatchContext);
 
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
