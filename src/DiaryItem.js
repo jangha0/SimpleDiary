@@ -1,8 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 import { DiaryDispatchContext } from "./App";
 const DiaryItem = ({ id, author, content, emotion, created_date }) => {
-  //onEdit, onRemove props 삭제 후,
-  // - const { onRemove, onEdit } = useContext(DiaryDispatchContext);
   const { onRemove, onEdit } = useContext(DiaryDispatchContext);
 
   const [isEdit, setIsEdit] = useState(false);
